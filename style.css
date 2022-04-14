@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+}
+h1 {
+    text-align: center;
+    font: white;
+    background-color: rgb(13, 13, 124);
+    margin: 0;
+    padding: 1.3rem;
+}
+main {
+    display: flex;
+}
