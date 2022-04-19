@@ -1,5 +1,15 @@
+// That first acceptance criteria is big. let's break it down.
+// build the html and css to support the page
+// how to fetch data
+//      successfully console log an array from open weather api
+//      Place the date in the current day box
+
 //declare variables:
 const searchBtn = document.querySelector('#search-btn');
+const cityDate = document.querySelector('#city-date');
+const todaysDate = moment().format('MMM Do, YYYY');
+
+
 
 function fetchCityDeets() {
     const weatherKey = "3d9956d2d042c8cf613c82d30cf3b4d2";
@@ -10,6 +20,7 @@ function fetchCityDeets() {
     .then(function(data) {
     console.log(data);
     console.log(city);
+    cityDate.textContent = data.name + ', ' + todaysDate;
   })
 }
 searchBtn.addEventListener('click', fetchCityDeets);
@@ -55,9 +66,3 @@ searchBtn.addEventListener('click', fetchCityDeets);
 // }
 //Use the below format for calling cities by name
 //https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-
-// That first acceptance criteria is big. let's break it down.
-// build the html and css to support the page
-// how to fetch data
-//      successfully console log an array from open weather api
-//      
