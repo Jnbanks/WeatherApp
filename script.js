@@ -1,27 +1,36 @@
 //declare variables:
-const weatherKey = "3d9956d2d042c8cf613c82d30cf3b4d2";
-let city;
-let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherKey;
 const searchBtn = document.querySelector('#search-btn');
 
+function fetchCityDeets() {
+    const weatherKey = "3d9956d2d042c8cf613c82d30cf3b4d2";
+    let city = document.querySelector('#city-input').value;
+    let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherKey;
+    fetch(queryURL)
+    .then(function(resp) { return resp.json() }) // Convert data to json
+    .then(function(data) {
+    console.log(data);
+    console.log(city);
+  })
+}
+searchBtn.addEventListener('click', fetchCityDeets);
 
 //fetch(queryURL);
 
 
-const today = document.querySelector('#city-date');
-const todayTemp = document.querySelector('#temp');
-const todayWind = document.querySelector('#wind');
-const todayHumidity = document.querySelector('#humidity');
-const todayUv = document.querySelector('#uv');
+// let today = document.querySelector('#city-date');
+// let todayTemp = document.querySelector('#temp');
+// let todayWind = document.querySelector('#wind');
+// let todayHumidity = document.querySelector('#humidity');
+// let todayUv = document.querySelector('#uv');
 
 
-function displayWeather(){
+//function displayWeather(){
 // today.innerHTML = 
 // todayTemp.innerHTML = 
 // todayWind.innerHTML =
 // todayHumidity.innerHTML = 
 // todayUv.innerHTML = 
-}
+//}
 
 //I don't know if I need : '', after the object items, or if I can just put a comma after their names. city, vs city: '',
 // const weather = {
@@ -46,3 +55,9 @@ function displayWeather(){
 // }
 //Use the below format for calling cities by name
 //https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+// That first acceptance criteria is big. let's break it down.
+// build the html and css to support the page
+// how to fetch data
+//      successfully console log an array from open weather api
+//      
