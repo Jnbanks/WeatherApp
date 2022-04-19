@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="./style.css">
     <title>Weather_App</title>
 </head>
@@ -12,10 +13,59 @@
         <h1>Weather Dashboard</h1>
     </header>
     <main>
-        <div>
-            <h2>Search for a City</h2>
-        </div>
-        <div></div>
+            <div id="search-bar">
+                <h2>Search for a City:</h2>
+                <input id="city-input" type="text" placeholder="city"></input>
+                <button id="search-btn">Search</button>
+                <div id="search-history">Search history</div>
+            </div>
+            <div id="results-container">
+                <div class="full-block" id="current-box">
+                    <div id="city-date">Current City (Today's Date)</div>
+                    <div id="temp">Temp</div>
+                    <div id="wind">Wind</div>
+                    <div id="humidity">Humidity</div>
+                    <div id="uv">Uv Index</div>
+                </div>
+                <h3 class="full-block">5-Day Forecast:</h3>
+                <div id="forecast">
+                    <div class="forecast-day">
+                        <div class="date">date</div>
+                        <div class="icon">icon</div>
+                        <div class="temp">temp</div>
+                        <div class="wind">wind</div>
+                        <div class="humidity">humidity</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div>date</div>
+                        <div>icon</div>
+                        <div>temp</div>
+                        <div>wind</div>
+                        <div>humidity</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div>date</div>
+                        <div>icon</div>
+                        <div>temp</div>
+                        <div>wind</div>
+                        <div>humidity</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div>date</div>
+                        <div>icon</div>
+                        <div>temp</div>
+                        <div>wind</div>
+                        <div>humidity</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div>date</div>
+                        <div>icon</div>
+                        <div>temp</div>
+                        <div>wind</div>
+                        <div>humidity</div>
+                    </div>
+                </div>
+            </div>
     </main>
 
     <script src="./script.js"></script>
