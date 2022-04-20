@@ -14,21 +14,32 @@ const todaysDate = moment().format('MMM Do, YYYY');
 const todayTemp = document.querySelector('#temp');
 const todayWind = document.querySelector('#wind');
 const todayHumidity = document.querySelector('#humidity');
-
+const todayUv = document.querySelector('#uv');
 
 function fetchCityDeets() {
     const weatherKey = "3d9956d2d042c8cf613c82d30cf3b4d2";
     let city = document.querySelector('#city-input').value;
-    let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + weatherKey;
+    //let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + weatherKey;
+    let queryURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&units=imperial&limit=1&appid=' + weatherKey;
     fetch(queryURL)
     .then(function(resp) { return resp.json() }) // Convert data to json
     .then(function(data) {
-    console.log(data);
-    console.log(city);
-    cityDate.textContent = data.name + '    ' + todaysDate;
-    todayTemp.textContent = 'Temp: ' + data.main.temp + ' \xB0 F';
-    todayWind.textContent = 'Wind: ' + data.wind.speed + 'mph';
-    todayHumidity.textContent = 'Humidity: ' + data.main.humidity + '%';
+      //the api fetch by city name did not include the uv index, but the lat an long includes everything. So what I think needs to be done is a fetch which gets the lat and long, and then use those numbers in a new fetch which can get all the information that I need. 
+      console.log(data);
+      console.log(city);
+      const lat = data[0].lat;
+      const lon = data[0].lon;
+      fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&appid='+weatherKey)
+      .then(function(resp) { return resp.json() }) // Convert data to json
+      .then(function(data){
+        console.log(data);
+        //console.log(city);
+      })
+    //cityDate.textContent = data.name + ' ' + todaysDate;
+    //todayTemp.textContent = 'Temp: ' + data.main.temp + ' \xB0 F';
+    //todayWind.textContent = 'Wind: ' + data.wind.speed + 'mph';
+    //todayHumidity.textContent = 'Humidity: ' + data.main.humidity + '%';
+    //todayUv.textContent = 'UV Index: ' + data.
   })
 }
 searchBtn.addEventListener('click', fetchCityDeets);
