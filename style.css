@@ -10,6 +10,7 @@
 body {
     margin: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 h1 {
     text-align: center;
@@ -63,4 +64,7 @@ input {
 }
 #city-date {
     font-size: 150%;
+}
+h3 {
+    text-align: center;
 }

@@ -7,11 +7,12 @@
 //        place the temp in the current day box
 //         convert that temp to Fahrenheit before displaying it. this was done by adjusting the api call, not by trying to add a function that converts kelvin to fahrenheit lol
 //        place the wind in the current day box, then the humidity, then the uv index
-//      complete the five forecast day boxes
-//        
-//      add the city name to the search history column beneath the search button     
+//      Complete the five forecast day boxes
+//        The icon was the trickiest part of this task. I had to  1) create images in the div tags, 2) find the icon id in the fetched object, 3) Insert the icon id into the icon image url, 4) Insert the fetched image into the div to display on the webpage 
+//      Add the city name to the search history column beneath the search button     
 
-//declare variables:
+//Declare variables:
+//Current Day Element
 const searchBtn = document.querySelector('#search-btn');
 const cityDate = document.querySelector('#city-date');
 const todaysDate = moment().format('(M/D/YYYY)');
@@ -19,7 +20,9 @@ const todayTemp = document.querySelector('#temp');
 const todayWind = document.querySelector('#wind');
 const todayHumidity = document.querySelector('#humidity');
 const todayUv = document.querySelector('#uv');
-//forecast variables
+//History column
+const searchHistory = document.querySelector('#search-history');
+//Forecast variables
 //  dates
 const f1date = document.querySelector('#forecast1 .date');
 const f2date = document.querySelector('#forecast2 .date');
@@ -53,12 +56,25 @@ const f5humidity = document.querySelector('#forecast5 .humidity');
 
 
 function fetchCityDeets() {
+  //Create variables for city API weather fetch
   const weatherKey = "3d9956d2d042c8cf613c82d30cf3b4d2";
   let city = document.querySelector('#city-input').value;
   let queryURLCity = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + weatherKey;
   let queryURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&units=imperial&limit=1&appid=' + weatherKey;
-    fetch(queryURLCity)
-    .then(function(resp) { return resp.json() }) // Convert data to json
+  //Create variables for history column
+  const searchedCity = document.createElement("div");
+  
+  fetch(queryURLCity)
+  .then(function(resp) { 
+    if (resp.status === 404) {
+      return resp.json()
+      //event.preventDefault;
+      //alert('not a valid city name')
+    } else {
+      searchedCity.textContent = city;
+      searchHistory.appendChild(searchedCity);
+    }
+      return resp.json() }) // Convert data to json
     .then(function(data){
       //console.log(data);
       cityDate.textContent = data.name + ' ' + todaysDate;
@@ -87,25 +103,25 @@ function fetchCityDeets() {
         f4date.textContent = moment(data.daily[4].dt * 1000).format('M/D/YYYY');
         f5date.textContent = moment(data.daily[5].dt * 1000).format('M/D/YYYY');
         //Forecast Icons
-        //  Create images inside the div tags
+        //  1) Create images inside the div tags
         const icon1 = document.createElement("img");
         const icon2 = document.createElement("img");
         const icon3 = document.createElement("img");
         const icon4 = document.createElement("img");
         const icon5 = document.createElement("img");
-        //  Find the icon id in the fetched object
+        //  2) Find the icon id in the fetched object
         const icon1a = data.daily[1].weather[0].icon;
         const icon2a = data.daily[2].weather[0].icon;
         const icon3a = data.daily[3].weather[0].icon;
         const icon4a = data.daily[4].weather[0].icon;
         const icon5a = data.daily[5].weather[0].icon;
-        //  Insert the icon id into the icon image url
+        //  3) Insert the icon id into the icon image url
         icon1.src = 'http://openweathermap.org/img/wn/'+icon1a+'@2x.png';
         icon2.src = 'http://openweathermap.org/img/wn/'+icon2a+'@2x.png';
         icon3.src = 'http://openweathermap.org/img/wn/'+icon3a+'@2x.png';
         icon4.src = 'http://openweathermap.org/img/wn/'+icon4a+'@2x.png';
         icon5.src = 'http://openweathermap.org/img/wn/'+icon5a+'@2x.png';
-        //  Finally, insert the fetched image into the div to display on the webpage
+        //  4) Finally, insert the fetched image into the div to display on the webpage
         f1icon.appendChild(icon1);
         f2icon.appendChild(icon2);
         f3icon.appendChild(icon3);
