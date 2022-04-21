@@ -11,6 +11,9 @@
 //        The icon was the trickiest part of this task. I had to  1) create images in the div tags, 2) find the icon id in the fetched object, 3) Insert the icon id into the icon image url, 4) Insert the fetched image into the div to display on the webpage 
 //      Add the city name to the search history column beneath the search button
 //   determine the uv index element box color depending on favorable, moderate or severe
+//   make the cities in the search history column clickable and able to refetch the weather data on them, preferably without appending again to the search history but I don't think that is most important right now
+//  Things to improve in the future:
+//    uv index color only in the numbers given, not the entire element which stretches across most of the page
 
 //Declare variables:
 //Current Day Element
@@ -63,7 +66,7 @@ function fetchCityDeets() {
   let queryURLCity = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + weatherKey;
   let queryURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&units=imperial&limit=1&appid=' + weatherKey;
   //Create variables for history column
-  const searchedCity = document.createElement("div");
+  const searchedCity = document.createElement("button");
   //remove the previously appended weather icon so you don't get weather icons accumulating after each search
   f1icon.innerHTML = '';
   f2icon.innerHTML = '';
@@ -80,6 +83,8 @@ function fetchCityDeets() {
     } else {
       searchedCity.textContent = city;
       searchHistory.appendChild(searchedCity);
+      //You are trying to make the city buttons in the search history clickable and able to refetch their city weather data
+      //elemm.onclick = function() { alert('blah'); };
     }
       return resp.json() }) // Convert data to json
     .then(function(data){
@@ -104,7 +109,7 @@ function fetchCityDeets() {
         console.log(city);
         const uvIndex = data.current.uvi;
         todayUv.textContent = 'UV Index: ' + uvIndex;
-        //Set the background color of the uv element depending on severity of the uv index
+        //Set the background color of the uv element depending on severity of the uv index. It is not the prettiest but it functions for now
         if (uvIndex >= 0 && uvIndex < 2) {
           todayUv.style.backgroundColor = 'green';
         } else if (uvIndex >= 2 && uvIndex < 8) {
