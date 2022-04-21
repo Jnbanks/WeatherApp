@@ -63,8 +63,8 @@ function fetchCityDeets() {
   //Create variables for city API weather fetch
   const weatherKey = "3d9956d2d042c8cf613c82d30cf3b4d2";
   let city = document.querySelector('#city-input').value;
-  let queryURLCity = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + weatherKey;
-  let queryURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&units=imperial&limit=1&appid=' + weatherKey;
+  let queryURLCity = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + weatherKey;
+  let queryURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city +'&units=imperial&limit=1&appid=' + weatherKey;
   //Create variables for history column
   const searchedCity = document.createElement("button");
   //remove the previously appended weather icon so you don't get weather icons accumulating after each search
@@ -137,11 +137,11 @@ function fetchCityDeets() {
         const icon4a = data.daily[4].weather[0].icon;
         const icon5a = data.daily[5].weather[0].icon;
         //  3) Insert the icon id into the icon image url
-        icon1.src = 'http://openweathermap.org/img/wn/'+icon1a+'@2x.png';
-        icon2.src = 'http://openweathermap.org/img/wn/'+icon2a+'@2x.png';
-        icon3.src = 'http://openweathermap.org/img/wn/'+icon3a+'@2x.png';
-        icon4.src = 'http://openweathermap.org/img/wn/'+icon4a+'@2x.png';
-        icon5.src = 'http://openweathermap.org/img/wn/'+icon5a+'@2x.png';
+        icon1.src = 'https://openweathermap.org/img/wn/'+icon1a+'@2x.png';
+        icon2.src = 'https://openweathermap.org/img/wn/'+icon2a+'@2x.png';
+        icon3.src = 'https://openweathermap.org/img/wn/'+icon3a+'@2x.png';
+        icon4.src = 'https://openweathermap.org/img/wn/'+icon4a+'@2x.png';
+        icon5.src = 'https://openweathermap.org/img/wn/'+icon5a+'@2x.png';
         //  4) Finally, insert the fetched image into the div to display on the webpage
         f1icon.appendChild(icon1);
         f2icon.appendChild(icon2);
