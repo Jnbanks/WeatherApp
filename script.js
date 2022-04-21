@@ -63,6 +63,12 @@ function fetchCityDeets() {
   let queryURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&units=imperial&limit=1&appid=' + weatherKey;
   //Create variables for history column
   const searchedCity = document.createElement("div");
+  //remove the previously appended weather icon
+  f1icon.innerHTML = '';
+  f2icon.innerHTML = '';
+  f3icon.innerHTML = '';
+  f4icon.innerHTML = '';
+  f5icon.innerHTML = '';
   
   fetch(queryURLCity)
   .then(function(resp) { 
