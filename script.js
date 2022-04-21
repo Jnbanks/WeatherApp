@@ -9,7 +9,8 @@
 //        place the wind in the current day box, then the humidity, then the uv index
 //      Complete the five forecast day boxes
 //        The icon was the trickiest part of this task. I had to  1) create images in the div tags, 2) find the icon id in the fetched object, 3) Insert the icon id into the icon image url, 4) Insert the fetched image into the div to display on the webpage 
-//      Add the city name to the search history column beneath the search button     
+//      Add the city name to the search history column beneath the search button
+//   determine the uv index element box color depending on favorable, moderate or severe
 
 //Declare variables:
 //Current Day Element
@@ -63,7 +64,7 @@ function fetchCityDeets() {
   let queryURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city +'&units=imperial&limit=1&appid=' + weatherKey;
   //Create variables for history column
   const searchedCity = document.createElement("div");
-  //remove the previously appended weather icon
+  //remove the previously appended weather icon so you don't get weather icons accumulating after each search
   f1icon.innerHTML = '';
   f2icon.innerHTML = '';
   f3icon.innerHTML = '';
@@ -101,7 +102,16 @@ function fetchCityDeets() {
       .then(function(data){
         console.log(data);
         console.log(city);
-        todayUv.textContent = 'UV Index: ' + data.current.uvi;
+        const uvIndex = data.current.uvi;
+        todayUv.textContent = 'UV Index: ' + uvIndex;
+        //Set the background color of the uv element depending on severity of the uv index
+        if (uvIndex >= 0 && uvIndex < 2) {
+          todayUv.style.backgroundColor = 'green';
+        } else if (uvIndex >= 2 && uvIndex < 8) {
+          todayUv.style.backgroundColor = 'yellow';
+        } else if (uvIndex >= 8) {
+          todayUv.style.backgroundColor = 'red';
+        }
         //forecast dates
         f1date.textContent = moment(data.daily[1].dt * 1000).format('M/D/YYYY');
         f2date.textContent = moment(data.daily[2].dt * 1000).format('M/D/YYYY');
