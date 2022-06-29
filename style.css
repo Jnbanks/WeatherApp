@@ -14,7 +14,7 @@ body {
 }
 h1 {
     text-align: center;
-    font: white;
+    color: white;
     background-image: linear-gradient(to right, rgb(55, 95, 218), rgb(0, 0, 120));
     margin: 0;
     padding: 1.3rem;
